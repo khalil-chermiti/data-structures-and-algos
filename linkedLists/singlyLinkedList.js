@@ -11,7 +11,7 @@ class LinkedList {
     this.tail = null;
     this.length = 0;
   }
-
+  // o(1)
   push(value) {
     const newNode = new Node(value);
 
@@ -26,7 +26,7 @@ class LinkedList {
     this.length++;
     return this;
   }
-
+  // O(n)
   traverse() {
     let pointer = this.head;
     while (pointer) {
@@ -35,6 +35,7 @@ class LinkedList {
     }
   }
 
+  // o(n)
   pop() {
     if (!this.head) return undefined;
 
@@ -58,6 +59,7 @@ class LinkedList {
     return current;
   }
 
+  // o(1)
   shift() {
     if (!this.head) return undefined;
 
@@ -69,7 +71,7 @@ class LinkedList {
 
     return pointer;
   }
-
+  // o(1)
   unshift(val) {
     const newNode = new Node(val);
     if (!this.head) {
@@ -83,7 +85,9 @@ class LinkedList {
     this.length++;
     return this;
   }
+
   // statrts from 0
+  // o(n)
   get(index) {
     // out of range
     if (index >= this.length || index < 0) return null;
@@ -99,6 +103,7 @@ class LinkedList {
   }
 
   // updating a list node's value
+  // O(n)
   set(val, index) {
     foundNode = this.get(index);
     if (foundNode) {
@@ -109,6 +114,7 @@ class LinkedList {
     return false;
   }
 
+  //O(n)
   insert(val, index) {
     // out of range
     if (index > this.length || index < 0) return false;
@@ -129,6 +135,7 @@ class LinkedList {
     return true;
   }
 
+  // O(n)
   remove(index) {
     // out of range
     if (index >= this.length || index < 0) return false;
@@ -149,6 +156,7 @@ class LinkedList {
     return nodeToRemove;
   }
 
+  // O(n)
   reverse() {
     // swapping head and tail
     let node = this.head;
@@ -167,6 +175,7 @@ class LinkedList {
     return this;
   }
 
+  // O(n)
   toArray() {
     var arr = [];
     var current = this.head;
@@ -185,7 +194,7 @@ const list = new LinkedList();
 // list.unshift(10);
 // list.insert(1, 1);
 // list.remove(1);
-// // list.traverse();
+// list.traverse();
 // console.log(list.toArray());
 // list.reverse();
 // console.log(list.toArray());
