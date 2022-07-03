@@ -48,7 +48,6 @@ class BinarySearchTree {
   // O(log(n))
   find(value) {
     if (this.root === null) return false;
-
     let pointer = this.root;
 
     while (pointer) {
@@ -58,6 +57,31 @@ class BinarySearchTree {
     }
 
     return false;
+  }
+
+  // O(log(n))
+  find_rec(value) {
+    return (function recurse(pointer, value) {
+      if (pointer === null) return false;
+      if (pointer.value === value) return pointer;
+
+      if (value < pointer.value) return recurse(pointer.left, value);
+      if (value > pointer.value) return recurse(pointer.right, value);
+    })(this.root, value);
+  }
+
+  // O(log(n))
+  reverse() {
+    (function recurse(pointer) {
+      if (pointer === null) return;
+
+      let temp = pointer.left;
+      pointer.left = pointer.right;
+      pointer.right = temp;
+
+      recurse(pointer.right);
+      recurse(pointer.left);
+    })(this.root);
   }
 
   // level order breadth first search
@@ -176,7 +200,7 @@ BST.insert(0);
 //      +------+     +------+
 //      0      2     7      40
 
-console.log("search node.val === 1 :\n", BST.find(1));
+console.log("search node.val === 1 :\n", BST.find_rec(40));
 
 console.log("BFS  :", JSON.stringify(BST.BFS()));
 console.log("BFS recursive :", JSON.stringify(BST.BFS_REC()));
@@ -184,6 +208,9 @@ console.log("BFS recursive :", JSON.stringify(BST.BFS_REC()));
 console.log("DFS preorder :", JSON.stringify(BST.DFS_PREORDER()));
 console.log("DFS postorder :", JSON.stringify(BST.DFS_POSTORDER()));
 console.log("DFS inorder :", JSON.stringify(BST.DFS_INORDER()));
+
+BST.reverse();
+console.log("BST reversed DFS inorder :", JSON.stringify(BST.DFS_INORDER()));
 
 /*
 ! time complexity :
