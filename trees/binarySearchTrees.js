@@ -45,6 +45,38 @@ class BinarySearchTree {
     }
   }
 
+  findMin(node) {
+    let minValue = node.value;
+
+    while (node.left) {
+      minValue = node.left.value;
+      node = node.left;
+    }
+
+    return minValue;
+  }
+
+  delete(node, value) {
+    // base case
+    if (node === null) return node;
+
+    // find the node
+    if (value < node.value) 
+      node.left = this.delete(node.left, value);
+    else if (value > node.value) 
+      node.right = this.delete(node.right, value);
+
+    else {
+      if (node.left === null) return node.right;
+      if (node.right === null) return node.left;
+
+      node.value = this.findMin(node.right);
+      node.right = this.delete(node.right, node.value);
+    }
+
+    return node;
+  }
+
   // O(log(n))
   find(value) {
     if (this.root === null) return false;
@@ -193,6 +225,7 @@ BST.insert(40);
 BST.insert(2);
 BST.insert(7);
 BST.insert(0);
+// BST.delete(BST.root, 10);
 
 //               4
 //         +------------+
